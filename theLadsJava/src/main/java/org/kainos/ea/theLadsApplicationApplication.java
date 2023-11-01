@@ -4,6 +4,7 @@ import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import org.kainos.ea.resources.DelivEmpController;
+import org.kainos.ea.resources.SalesEmployeeController;
 
 public class theLadsApplicationApplication extends Application<theLadsApplicationConfiguration> {
 
@@ -26,6 +27,8 @@ public class theLadsApplicationApplication extends Application<theLadsApplicatio
                     final Environment environment) {
         // TODO: implement application
         environment.jersey().register(new DelivEmpController());
+        environment.jersey().register(new SalesEmployeeController());
+
     }
 
 }
