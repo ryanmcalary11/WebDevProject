@@ -17,7 +17,7 @@ import java.util.List;
 public class DelivEmpController {
     private DelivEmpService delivEmpService = new DelivEmpService();
     @POST
-    @Path("/deliveryEmployees")
+    @Path("/createDeliveryEmployees")
     @Produces(MediaType.APPLICATION_JSON)
     public Response createDelivEmployee(DelivEmpRequest delivEmp) {
         try {

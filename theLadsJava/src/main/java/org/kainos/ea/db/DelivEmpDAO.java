@@ -15,15 +15,15 @@ public class DelivEmpDAO {
 
         Connection c = DatabaseConnector.getConnection();
 
-        String insertStatement = "INSERT INTO DelivEmployee(fName, lName, niNum, salary, bankAccountNo) VALUES(?, ?, ?, ?, ?)";
+        String insertStatement = "INSERT INTO DeliveryEmployee(dEmpForename, dEmpSurname, dEMPBankNum, nationalInsuranceNum, salary) VALUES(?, ?, ?, ?, ?)";
 
         PreparedStatement st = c.prepareStatement(insertStatement, Statement.RETURN_GENERATED_KEYS);
 
         st.setString(1, dEmp.getfName());
         st.setString(2, dEmp.getlName());
-        st.setString(3, dEmp.getNiNum());
-        st.setDouble(4, dEmp.getSalary());
-        st.setString(4, dEmp.getBankAccountNo());
+        st.setString(3, dEmp.getBankAccountNo());
+        st.setString(4, dEmp.getNiNum());
+        st.setDouble(5, dEmp.getSalary());
 
         st.executeUpdate();
 
@@ -41,7 +41,7 @@ public class DelivEmpDAO {
             Connection c = dbConnector.getConnection();
 
             String updateStringStatement = "UPDATE DeliveryEmployee SET dEmpForename = ?, dEmpSurname = ?, " +
-                    "salary = ?, naionalInsuranceNum = ?, dEMPBankNum = ? ";
+                    "salary = ?, nationalInsuranceNum = ?, dEMPBankNum = ? ";
 
             PreparedStatement updatePSt = c.prepareStatement(updateStringStatement, Statement.RETURN_GENERATED_KEYS);
 
