@@ -19,6 +19,8 @@ public class DelivEmployee {
         this.bankAccountNo = bankAccountNo;
     }
 
+
+
     public DelivEmployee(String fName, String lName, double salary, String niNum, String bankAccountNo) {
         this.fName = fName;
         this.lName = lName;

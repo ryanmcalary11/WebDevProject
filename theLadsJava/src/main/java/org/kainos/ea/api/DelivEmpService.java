@@ -2,8 +2,11 @@ package org.kainos.ea.api;
 
 import org.kainos.ea.cli.DelivEmpRequest;
 import org.kainos.ea.cli.DelivEmployee;
+import org.kainos.ea.cli.Project;
 import org.kainos.ea.client.*;
+import org.kainos.ea.core.DelivEmpToProjectValidator;
 import org.kainos.ea.core.DelivEmployeeValidator;
+import org.kainos.ea.core.DelivEmployeeValidatorR;
 import org.kainos.ea.db.DelivEmpDAO;
 
 import java.sql.SQLException;
@@ -14,6 +17,7 @@ public class DelivEmpService {
 
     private DelivEmpDAO delivEmpDAO = new DelivEmpDAO();
     private DelivEmployeeValidator delivEmployeeValidator = new DelivEmployeeValidator();
+    private DelivEmpToProjectValidator delivEmpToProjectValidator = new DelivEmpToProjectValidator();
   
     public int createDelivEmployee(DelivEmpRequest dEmp) throws FailedToCreateDelivEmpException, InvalidDelivEmpException {
         try{
@@ -100,6 +104,28 @@ public class DelivEmpService {
             delivEmpDAO.deleteDelivEmp(id);
         }catch(SQLException e){
             System.err.println(e.getMessage());
+        }
+    }
+
+    public int assignDelivEmpToProject(DelivEmployee dEmp, Project project) throws FailedToCreateDelivEmpException, InvalidDelivEmpException {
+        try{
+            String validation = delivEmpToProjectValidator.isDelivEmpToProjectValid(project, dEmp);
+
+            if(validation != null){
+                throw new InvalidDelivEmpException(validation);
+            }
+
+            int id = delivEmpDAO.assignDelivEmpToProject(dEmp, project);
+
+            if(id == -1){
+                throw new FailedToCreateDelivEmpException();
+            }
+
+            return id;
+        }
+        catch(SQLException e){
+            System.err.println(e.getMessage());
+            throw new FailedToCreateDelivEmpException();
         }
     }
 }

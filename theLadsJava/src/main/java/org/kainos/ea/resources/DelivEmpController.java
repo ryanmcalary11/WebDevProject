@@ -7,6 +7,7 @@ import io.swagger.annotations.Api;
 import org.kainos.ea.api.DelivEmpService;
 import org.kainos.ea.cli.DelivEmpRequest;
 import org.kainos.ea.cli.DelivEmployee;
+import org.kainos.ea.cli.Project;
 import org.kainos.ea.client.*;
 import java.sql.SQLException;
 import java.util.List;
@@ -83,7 +84,7 @@ public class DelivEmpController {
     @PUT
     @Path ("/deliveryEmployees/{id}")
     @Produces (MediaType .APPLICATION_JSON)
-    public Response createDelivEmployee (@PathParam("id") int id, DelivEmpRequest delivEmp) {
+    public Response updateDelivEmployee (@PathParam("id") int id, DelivEmpRequest delivEmp) {
         try {
             delivEmpService.updateDelivEmployee(id, delivEmp);
             return Response.ok().build();
@@ -98,6 +99,22 @@ public class DelivEmpController {
             return Response.serverError().build();
         }
     }
+
+//    @POST
+//    @Path("/assignDeliveryEmployeeToProject")
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public Response assignDelivEmpToProject(DelivEmployee delivEmp, Project project) {
+//        try {
+//            return Response.ok().entity(delivEmpService.assignDelivEmpToProject(delivEmp, project)).build();
+//        }
+//        catch (FailedToCreateDelivEmpException e) {
+//            System.err.println(e.getMessage());
+//            return Response.serverError().build();
+//        } catch (InvalidDelivEmpException e) {
+//            System.err.println(e.getMessage());
+//            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+//        }
+//    }
 
 
 }
