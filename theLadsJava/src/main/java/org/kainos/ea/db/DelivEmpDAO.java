@@ -100,9 +100,6 @@ public class DelivEmpDAO {
         }
         return delivEmpList;
 
-//           catch (SQLException e) {
-//            e.getMessage();
-//            throw new RuntimeException(e);
     }
 
 

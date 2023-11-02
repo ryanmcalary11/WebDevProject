@@ -5,10 +5,7 @@ import org.kainos.ea.api.DeliveryProjectService;
 import org.kainos.ea.cli.DelivEmpRequest;
 import org.kainos.ea.cli.DelivEmployee;
 import org.kainos.ea.cli.Project;
-import org.kainos.ea.client.DeliveryEmployeeDoesNotExistException;
-import org.kainos.ea.client.FailedToCreateDelivEmpException;
-import org.kainos.ea.client.FailedToUpdateDelivEmpException;
-import org.kainos.ea.client.InvalidDelivEmpException;
+import org.kainos.ea.client.*;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -26,10 +23,6 @@ public class DeliveryProjectController {
         try {
             deliveryProjectService.assignDelivEmpToProject(delivEmpId, projectId);
             return Response.ok().build();
-        }
-        catch (FailedToCreateDelivEmpException e) {
-            System.err.println(e.getMessage());
-            return Response.serverError().build();
         } catch (InvalidDelivEmpException e) {
             System.err.println(e.getMessage());
             return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
@@ -48,14 +41,13 @@ public class DeliveryProjectController {
             deliveryProjectService.removeDelivEmployeeFromProject(delivEmpId, projectId);
             return Response.ok().build();
 
-        } catch (InvalidDelivEmpException | DeliveryEmployeeDoesNotExistException e) {
+        } catch (InvalidDelivEmpException e) {
             System.err.println(e.getMessage());
 
             return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build(); //client side error
-        } catch (FailedToUpdateDelivEmpException e) {
-            System.err.println(e.getMessage());
-
-            return Response.serverError().build();
+        }
+        catch (FailedToRemoveDeliveryEmpFromProject e) {
+            throw new RuntimeException(e);
         }
     }
 }
