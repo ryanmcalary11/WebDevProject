@@ -39,5 +39,5 @@ build/
 
 ### Project Specific ###
 db.properties
-client/dist/
-client/node_modules/
+Frontend/dist/
+Frontend/node_modules/
