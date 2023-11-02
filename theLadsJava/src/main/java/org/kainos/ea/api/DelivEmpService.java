@@ -2,8 +2,11 @@ package org.kainos.ea.api;
 
 import org.kainos.ea.cli.DelivEmpRequest;
 import org.kainos.ea.cli.DelivEmployee;
+import org.kainos.ea.cli.Project;
 import org.kainos.ea.client.*;
+import org.kainos.ea.core.DelivEmpToProjectValidator;
 import org.kainos.ea.core.DelivEmployeeValidator;
+import org.kainos.ea.core.DelivEmployeeValidatorR;
 import org.kainos.ea.db.DelivEmpDAO;
 
 import java.sql.SQLException;
@@ -14,6 +17,7 @@ public class DelivEmpService {
 
     private DelivEmpDAO delivEmpDAO = new DelivEmpDAO();
     private DelivEmployeeValidator delivEmployeeValidator = new DelivEmployeeValidator();
+    private DelivEmpToProjectValidator delivEmpToProjectValidator = new DelivEmpToProjectValidator();
   
     public int createDelivEmployee(DelivEmpRequest dEmp) throws FailedToCreateDelivEmpException, InvalidDelivEmpException {
         try{
@@ -102,5 +106,7 @@ public class DelivEmpService {
             System.err.println(e.getMessage());
         }
     }
+
+
 }
 

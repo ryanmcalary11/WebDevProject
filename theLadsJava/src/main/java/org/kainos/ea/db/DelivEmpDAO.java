@@ -2,6 +2,7 @@ package org.kainos.ea.db;
 
 import org.kainos.ea.cli.DelivEmpRequest;
 import org.kainos.ea.cli.DelivEmployee;
+import org.kainos.ea.cli.Project;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -14,15 +15,15 @@ public class DelivEmpDAO {
 
         Connection c = DatabaseConnector.getConnection();
 
-        String insertStatement = "INSERT INTO DelivEmployee(fName, lName, niNum, salary, bankAccountNo) VALUES(?, ?, ?, ?, ?)";
+        String insertStatement = "INSERT INTO DeliveryEmployee(dEmpForename, dEmpSurname, dEMPBankNum, nationalInsuranceNum, salary) VALUES(?, ?, ?, ?, ?)";
 
         PreparedStatement st = c.prepareStatement(insertStatement, Statement.RETURN_GENERATED_KEYS);
 
         st.setString(1, dEmp.getfName());
         st.setString(2, dEmp.getlName());
-        st.setString(3, dEmp.getNiNum());
-        st.setDouble(4, dEmp.getSalary());
-        st.setString(4, dEmp.getBankAccountNo());
+        st.setString(3, dEmp.getBankAccountNo());
+        st.setString(4, dEmp.getNiNum());
+        st.setDouble(5, dEmp.getSalary());
 
         st.executeUpdate();
 
@@ -39,8 +40,8 @@ public class DelivEmpDAO {
         try{
             Connection c = dbConnector.getConnection();
 
-            String updateStringStatement = "UPDATE DelivEmployee SET fName = ?, lName = ?, " +
-                    "salary = ?, niNum = ?, bankAccountNo = ? ";
+            String updateStringStatement = "UPDATE DeliveryEmployee SET dEmpForename = ?, dEmpSurname = ?, " +
+                    "salary = ?, nationalInsuranceNum = ?, dEMPBankNum = ? ";
 
             PreparedStatement updatePSt = c.prepareStatement(updateStringStatement, Statement.RETURN_GENERATED_KEYS);
 
@@ -65,17 +66,16 @@ public class DelivEmpDAO {
 
         Statement st = c.createStatement();
 
-        ResultSet rs = st.executeQuery("SELECT delivEmpId, fName, lName, salary, niNum, bankAccountNo FROM `DelivEmployee` " +
-                "WHERE productId="+id);
+        ResultSet rs = st.executeQuery("SELECT dEmpForename, dEmpSurname, dEMPBankNum, nationalInsuranceNum, salary FROM `DeliveryEmployee` " +
+                "WHERE dEmpID="+id);
 
         while (rs.next()) {
             return new DelivEmployee(
-                    rs.getInt("delivEmpId"),
-                    rs.getString("fName"),
-                    rs.getString("lName"),
-                    rs.getFloat("salary"),
-                    rs.getString("niNum"),
-                    rs.getString("bankAccountNo")
+                    rs.getString("dEmpForename"),
+                    rs.getString("dEmpSurname"),
+                    rs.getDouble("salary"),
+                    rs.getString("nationalInsuranceNum"),
+                    rs.getString("dEMPBankNum")
             );
         }
         return null;
@@ -85,15 +85,16 @@ public class DelivEmpDAO {
         Connection c = dbConnector.getConnection();
         Statement st = c.createStatement();
 
-        ResultSet rs = st.executeQuery("SELECT fName, lName, salary, niNum, bankAccountNo FROM `DelivEmployee`;");
+        ResultSet rs = st.executeQuery("SELECT dEmpID, dEmpForename, dEmpSurname, dEMPBankNum, nationalInsuranceNum, salary FROM `DeliveryEmployee`;");
         List<DelivEmployee> delivEmpList = new ArrayList<>();
         while (rs.next()) {
             DelivEmployee delivEmp = new DelivEmployee(
-                    rs.getString("fName"),
-                    rs.getString("lName"),
-                    rs.getFloat("salary"),
-                    rs.getString("niNum"),
-                    rs.getString("bankAccountNo")
+                    rs.getInt("dEmpID"),
+                    rs.getString("dEmpForename"),
+                    rs.getString("dEmpSurname"),
+                    rs.getDouble("salary"),
+                    rs.getString("nationalInsuranceNum"),
+                    rs.getString("dEMPBankNum")
             );
             delivEmpList.add(delivEmp);
         }
@@ -108,7 +109,7 @@ public class DelivEmpDAO {
     public void deleteDelivEmp(int id) throws SQLException{
         Connection c = DatabaseConnector.getConnection();
 
-        String deleteStatement = "DELETE FROM `DelivEmployee` WHERE delivEmpId = ?";
+        String deleteStatement = "DELETE FROM `DeliveryEmployee` WHERE dEmpId = ?";
 
         PreparedStatement st = c.prepareStatement(deleteStatement);
 
