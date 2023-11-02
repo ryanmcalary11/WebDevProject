@@ -56,3 +56,4 @@ app.get('/sales-team.html', async (req: Request, res: Response) => {
 
 //add require paths here!
 require('./controller/salesEmployeeController')(app);
+require('./controller/delivEmpController')(app);
