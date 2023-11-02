@@ -7,6 +7,7 @@ import io.swagger.annotations.Api;
 import org.kainos.ea.api.DelivEmpService;
 import org.kainos.ea.cli.DelivEmpRequest;
 import org.kainos.ea.cli.DelivEmployee;
+import org.kainos.ea.cli.Project;
 import org.kainos.ea.client.*;
 import java.sql.SQLException;
 import java.util.List;
@@ -16,7 +17,7 @@ import java.util.List;
 public class DelivEmpController {
     private DelivEmpService delivEmpService = new DelivEmpService();
     @POST
-    @Path("/deliveryEmployees")
+    @Path("/createDeliveryEmployee")
     @Produces(MediaType.APPLICATION_JSON)
     public Response createDelivEmployee(DelivEmpRequest delivEmp) {
         try {
@@ -83,7 +84,7 @@ public class DelivEmpController {
     @PUT
     @Path ("/deliveryEmployees/{id}")
     @Produces (MediaType .APPLICATION_JSON)
-    public Response createDelivEmployee (@PathParam("id") int id, DelivEmpRequest delivEmp) {
+    public Response updateDelivEmployee (@PathParam("id") int id, DelivEmpRequest delivEmp) {
         try {
             delivEmpService.updateDelivEmployee(id, delivEmp);
             return Response.ok().build();
@@ -98,6 +99,8 @@ public class DelivEmpController {
             return Response.serverError().build();
         }
     }
+
+
 
 
 }

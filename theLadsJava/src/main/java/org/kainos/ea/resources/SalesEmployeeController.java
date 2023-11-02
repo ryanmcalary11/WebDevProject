@@ -1,7 +1,6 @@
 package org.kainos.ea.resources;
 
 import io.swagger.annotations.Api;
-import org.kainos.ea.api.SalesEmployeeService;
 import org.kainos.ea.cli.SalesEmployeeRequest;
 import org.kainos.ea.client.*;
 
