@@ -117,27 +117,4 @@ public class DelivEmpDAO {
 
         st.executeUpdate();
     }
-
-    public int assignDelivEmpToProject(DelivEmployee delivEmp, Project project) throws SQLException {
-
-        Connection c = DatabaseConnector.getConnection();
-
-        String insertStatement = "INSERT INTO Project_DeliveryEmployee(dEmpID, projectID, activilyWorking) VALUES(?, ?, ?)";
-
-        PreparedStatement st = c.prepareStatement(insertStatement, Statement.RETURN_GENERATED_KEYS);
-
-        st.setInt(1, delivEmp.getDelivEmpId());
-        st.setInt(2, project.getProjectId());
-        st.setBoolean(3, true);
-
-        st.executeUpdate();
-
-        ResultSet rs = st.getGeneratedKeys();
-
-        if(rs.next()){
-            return rs.getInt(1);
-        }
-
-        return -1;
-    }
 }

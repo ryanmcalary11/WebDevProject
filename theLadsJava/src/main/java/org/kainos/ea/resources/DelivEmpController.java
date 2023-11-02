@@ -17,7 +17,7 @@ import java.util.List;
 public class DelivEmpController {
     private DelivEmpService delivEmpService = new DelivEmpService();
     @POST
-    @Path("/createDeliveryEmployees")
+    @Path("/createDeliveryEmployee")
     @Produces(MediaType.APPLICATION_JSON)
     public Response createDelivEmployee(DelivEmpRequest delivEmp) {
         try {
@@ -100,21 +100,7 @@ public class DelivEmpController {
         }
     }
 
-//    @POST
-//    @Path("/assignDeliveryEmployeeToProject")
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public Response assignDelivEmpToProject(DelivEmployee delivEmp, Project project) {
-//        try {
-//            return Response.ok().entity(delivEmpService.assignDelivEmpToProject(delivEmp, project)).build();
-//        }
-//        catch (FailedToCreateDelivEmpException e) {
-//            System.err.println(e.getMessage());
-//            return Response.serverError().build();
-//        } catch (InvalidDelivEmpException e) {
-//            System.err.println(e.getMessage());
-//            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
-//        }
-//    }
+
 
 
 }

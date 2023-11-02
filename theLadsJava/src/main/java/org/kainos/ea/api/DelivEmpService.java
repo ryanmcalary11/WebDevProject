@@ -107,26 +107,6 @@ public class DelivEmpService {
         }
     }
 
-    public int assignDelivEmpToProject(DelivEmployee dEmp, Project project) throws FailedToCreateDelivEmpException, InvalidDelivEmpException {
-        try{
-            String validation = delivEmpToProjectValidator.isDelivEmpToProjectValid(project, dEmp);
 
-            if(validation != null){
-                throw new InvalidDelivEmpException(validation);
-            }
-
-            int id = delivEmpDAO.assignDelivEmpToProject(dEmp, project);
-
-            if(id == -1){
-                throw new FailedToCreateDelivEmpException();
-            }
-
-            return id;
-        }
-        catch(SQLException e){
-            System.err.println(e.getMessage());
-            throw new FailedToCreateDelivEmpException();
-        }
-    }
 }
 
