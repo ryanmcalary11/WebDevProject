@@ -17,9 +17,9 @@ public class DeliveryProjectController {
 
     DeliveryProjectService deliveryProjectService = new DeliveryProjectService();
     @POST
-    @Path("/addDeliveryEmployeeToProject/{id1D}_{id2P}")
+    @Path("/addDeliveryEmployeeToProject/{delivEmpId}_{projectId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response assignDelivEmpToProject(@PathParam("id1D") int delivEmpId, @PathParam("id2P") int projectId) {
+    public Response assignDelivEmpToProject(@PathParam("delivEmpId") int delivEmpId, @PathParam("projectId") int projectId) {
         try {
             deliveryProjectService.assignDelivEmpToProject(delivEmpId, projectId);
             return Response.ok().build();
