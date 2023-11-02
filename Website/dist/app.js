@@ -80,4 +80,5 @@ app.get('/sales-team.html', function (req, res) { return __awaiter(void 0, void 
     });
 }); });
 //add require paths here!
+require('./controller/delivEmpController')(app);
 //# sourceMappingURL=app.js.map
