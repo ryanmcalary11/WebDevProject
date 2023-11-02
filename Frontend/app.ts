@@ -1,5 +1,6 @@
 import { Request, Response } from "express"
 import session = require("express-session");
+import { delivEmp } from "./model/delivEmp";
 
 const express = require('express');
 const path = require('path');
@@ -31,6 +32,7 @@ app.use(session({ secret: 'NOT HARDCODED SECRET', cookie: { maxAge: 60000}}))
 
 declare module 'express-session' {
     interface SessionData {
+        delivEmp: delivEmp;
     }
 }
 
