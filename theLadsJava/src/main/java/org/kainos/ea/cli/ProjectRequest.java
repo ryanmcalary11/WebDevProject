@@ -1,28 +1,19 @@
 package org.kainos.ea.cli;
-
-public class Project {
-    private int projectId;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+public class ProjectRequest {
     private String projectName;
     private float projectValue;
     private int clientId;
     private int techLeadId;
     private boolean isCompleted;
 
-    public Project(int projectId, String projectName, float projectValue, int clientId, int techLeadId, boolean isCompleted) {
-        this.projectId = projectId;
+    public ProjectRequest(String projectName, float projectValue, int clientId, int techLeadId, boolean isCompleted) {
         this.projectName = projectName;
         this.projectValue = projectValue;
         this.clientId = clientId;
         this.techLeadId = techLeadId;
         this.isCompleted = isCompleted;
-    }
-
-    public int getProjectId() {
-        return projectId;
-    }
-
-    public void setProjectId(int projectId) {
-        this.projectId = projectId;
     }
 
     public String getProjectName() {
